@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://1jf6endc14ig"]
+[gd_scene load_steps=19 format=3 uid="uid://1jf6endc14ig"]
 
 [ext_resource type="Script" path="res://script/game_ui.gd" id="1_pxpof"]
 [ext_resource type="Script" path="res://script/broad_game.gd" id="2_8r04c"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" path="res://script/data.gd" id="8_padt3"]
 [ext_resource type="Theme" uid="uid://cmpsy8vxgehd6" path="res://theme/theme_game_ui.tres" id="9_ghae4"]
 [ext_resource type="PackedScene" uid="uid://dji6kvgpvkryd" path="res://scene/file_data.tscn" id="10_nnb0w"]
+[ext_resource type="AudioStream" uid="uid://c0rgblmr7o1ar" path="res://sound/horse.mp3" id="16_5gjbi"]
+[ext_resource type="AudioStream" uid="uid://br38otcdr3ngp" path="res://sound/dice.mp3" id="17_b5p7t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1me1o"]
 
@@ -31,7 +33,7 @@ board_game = NodePath("BoardGame")
 data = NodePath("Data")
 ui_option = NodePath("Panel")
 
-[node name="BoardGame" type="Node2D" parent="." node_paths=PackedStringArray("horse_pos", "dice", "items_pos", "ui_options", "menu_option", "menu_select", "ui_score", "ui_disable", "game_data", "move_points", "start_points", "end_points", "level_points", "lable_team_info")]
+[node name="BoardGame" type="Node2D" parent="." node_paths=PackedStringArray("horse_pos", "dice", "items_pos", "horse_sfx", "dice_sfx", "ui_options", "menu_option", "menu_select", "ui_score", "ui_disable", "game_data", "move_points", "start_points", "end_points", "level_points", "lable_team_info")]
 process_mode = 1
 position = Vector2(544, 904)
 script = ExtResource("2_8r04c")
@@ -39,6 +41,8 @@ horse_scene = ExtResource("3_21v04")
 horse_pos = NodePath("Broad/HorsePosition")
 dice = NodePath("../Panel/Dice")
 items_pos = NodePath("Broad/ItemPosition")
+horse_sfx = NodePath("../HorseAudioStreamPlayer")
+dice_sfx = NodePath("../DiceAudioStreamPlayer")
 ui_options = NodePath("../Panel")
 menu_option = NodePath("../Panel/HBoxContainer/OptionsMenu")
 menu_select = NodePath("../Panel/HBoxContainer/OptionsSelect")
@@ -795,6 +799,14 @@ text = "X"
 [node name="Data" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("8_padt3")
+
+[node name="HorseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_5gjbi")
+volume_db = 5.0
+
+[node name="DiceAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_b5p7t")
+volume_db = 5.0
 
 [editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint"]
 [editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint2"]

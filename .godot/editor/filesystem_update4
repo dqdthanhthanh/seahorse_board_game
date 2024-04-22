@@ -1,2 +1,5 @@
 res://scene/game_ui.tscn
 res://theme/theme_game_ui.tres
+res://license.txt
+res://README.md
+res://script/broad_game.gd

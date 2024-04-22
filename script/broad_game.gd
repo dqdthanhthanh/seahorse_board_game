@@ -9,7 +9,12 @@ extends Node2D
 @export var dice: Dice
 # vi tri de sap xep cac ngua trong chuong luc dau
 @export var items_pos:Marker2D
-# menue
+# am thanh
+# horce
+@export var horse_sfx: AudioStreamPlayer
+# dice
+@export var dice_sfx: AudioStreamPlayer
+# menu
 @onready var menu: Control = get_parent()
 # ui dieu kien
 @export var ui_options: Panel
@@ -461,6 +466,7 @@ func options_roll_dice():
 	# gieo xuc xac: duoc dice_number
 	roll = false
 	menu_option_active()
+	dice_sfx.play()
 	dice_number = await dice.dice_roll()
 	menu_option_active(true)
 	prints("Dice is ", dice_number)
@@ -775,8 +781,10 @@ func tween_horse_position(obj, new_pos:Node2D, time:float = 0.5):
 	var tween:Tween = get_tree().create_tween()
 	tween.set_process_mode(1)
 	tween.tween_property(obj, "global_position", new_pos.global_position, time).set_trans(Tween.TRANS_BOUNCE)
+	horse_sfx.play()
 
 func tween_horse_enemy_back_position(obj, new_pos:Vector2, time:float = 0.5):
 	var tween:Tween = get_tree().create_tween()
 	tween.set_process_mode(1)
 	tween.tween_property(obj, "global_position", new_pos, time).set_trans(Tween.TRANS_BOUNCE)
+	horse_sfx.play()
