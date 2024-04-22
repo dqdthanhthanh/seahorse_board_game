@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://behbywb2bs2t3"]
+
+[ext_resource type="Script" path="res://script/move_point.gd" id="1_c16h4"]
+[ext_resource type="Texture2D" uid="uid://cmscobcbejtyl" path="res://2d/circle.png" id="2_rf2t8"]
+
+[node name="MovePoint" type="Marker2D"]
+position = Vector2(0, 315.829)
+gizmo_extents = 0.0
+script = ExtResource("1_c16h4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_rf2t8")

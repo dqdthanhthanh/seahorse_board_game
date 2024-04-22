@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b55454s2iskdx"]
+
+[ext_resource type="Texture2D" uid="uid://ddw0kpsp13fyw" path="res://2d/dice.png" id="1_kb3qg"]
+[ext_resource type="Script" path="res://script/dice.gd" id="1_mlesr"]
+
+[node name="Dice" type="Node2D" node_paths=PackedStringArray("icon")]
+script = ExtResource("1_mlesr")
+icon = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_kb3qg")
+hframes = 6
+vframes = 5
+frame = 1

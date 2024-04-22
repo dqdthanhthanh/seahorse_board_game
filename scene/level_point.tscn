@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4jidxovhleho"]
+
+[ext_resource type="Script" path="res://script/move_point.gd" id="1_qnrhj"]
+[ext_resource type="Texture2D" uid="uid://c4smwwst8ie7f" path="res://2d/square.png" id="2_cwg2p"]
+[ext_resource type="Texture2D" uid="uid://bdik57kihoqr7" path="res://2d/number.png" id="3_men4o"]
+
+[node name="LevelPoint" type="Marker2D"]
+position = Vector2(0.750188, -4.50076)
+script = ExtResource("1_qnrhj")
+
+[node name="Square" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.12, 0.1)
+texture = ExtResource("2_cwg2p")
+
+[node name="Number" type="Sprite2D" parent="."]
+texture = ExtResource("3_men4o")
+hframes = 4
+vframes = 4

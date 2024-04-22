@@ -1,0 +1,822 @@
+[gd_scene load_steps=17 format=3 uid="uid://1jf6endc14ig"]
+
+[ext_resource type="Script" path="res://script/game_ui.gd" id="1_pxpof"]
+[ext_resource type="Script" path="res://script/broad_game.gd" id="2_8r04c"]
+[ext_resource type="PackedScene" uid="uid://d2ewcjyyw7lqs" path="res://scene/horse.tscn" id="3_21v04"]
+[ext_resource type="PackedScene" uid="uid://b55454s2iskdx" path="res://scene/dice.tscn" id="4_17pcm"]
+[ext_resource type="Texture2D" uid="uid://b6od5k1cxmn4t" path="res://2d/white-square.png" id="4_44m85"]
+[ext_resource type="PackedScene" uid="uid://behbywb2bs2t3" path="res://scene/move_point.tscn" id="5_5qwfr"]
+[ext_resource type="PackedScene" uid="uid://b4jidxovhleho" path="res://scene/level_point.tscn" id="6_0r1m7"]
+[ext_resource type="Texture2D" uid="uid://g6abjmhv5qjo" path="res://2d/plus.png" id="6_slhn7"]
+[ext_resource type="Texture2D" uid="uid://cholnx1xcidi3" path="res://2d/godot_border.png" id="7_4riu1"]
+[ext_resource type="Texture2D" uid="uid://johxul0y6n5w" path="res://2d/godot_icon.png" id="7_rqpu7"]
+[ext_resource type="PackedScene" uid="uid://cste3l75kmum3" path="res://scene/option_select.tscn" id="8_gthwk"]
+[ext_resource type="PackedScene" uid="uid://iu4wlf304ks6" path="res://scene/team_score.tscn" id="8_h6qyn"]
+[ext_resource type="Script" path="res://script/data.gd" id="8_padt3"]
+[ext_resource type="Theme" uid="uid://cmpsy8vxgehd6" path="res://theme/theme_game_ui.tres" id="9_ghae4"]
+[ext_resource type="PackedScene" uid="uid://dji6kvgpvkryd" path="res://scene/file_data.tscn" id="10_nnb0w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1me1o"]
+
+[node name="GameUI" type="Control" node_paths=PackedStringArray("board_game", "data", "ui_option")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxpof")
+board_game = NodePath("BoardGame")
+data = NodePath("Data")
+ui_option = NodePath("Panel")
+
+[node name="BoardGame" type="Node2D" parent="." node_paths=PackedStringArray("horse_pos", "dice", "items_pos", "ui_options", "menu_option", "menu_select", "ui_score", "ui_disable", "game_data", "move_points", "start_points", "end_points", "level_points", "lable_team_info")]
+process_mode = 1
+position = Vector2(544, 904)
+script = ExtResource("2_8r04c")
+horse_scene = ExtResource("3_21v04")
+horse_pos = NodePath("Broad/HorsePosition")
+dice = NodePath("../Panel/Dice")
+items_pos = NodePath("Broad/ItemPosition")
+ui_options = NodePath("../Panel")
+menu_option = NodePath("../Panel/HBoxContainer/OptionsMenu")
+menu_select = NodePath("../Panel/HBoxContainer/OptionsSelect")
+ui_score = NodePath("../ScoreBoard")
+ui_disable = NodePath("../Panel/Disable")
+game_data = NodePath("../Data")
+move_points = NodePath("Broad/MovePoints")
+start_points = [NodePath("Broad/MovePoints/MovePoint2"), NodePath("Broad/MovePoints/MovePoint16"), NodePath("Broad/MovePoints/MovePoint30"), NodePath("Broad/MovePoints/MovePoint44")]
+end_points = [NodePath("Broad/MovePoints/MovePoint"), NodePath("Broad/MovePoints/MovePoint15"), NodePath("Broad/MovePoints/MovePoint29"), NodePath("Broad/MovePoints/MovePoint43")]
+level_points = NodePath("Broad/LevelPoints")
+lable_team_info = NodePath("../Panel/TeamInfo")
+AI_mode = false
+AI_only = false
+
+[node name="Broad" type="Sprite2D" parent="BoardGame"]
+z_index = -1
+scale = Vector2(1.333, 1.333)
+texture = ExtResource("4_44m85")
+
+[node name="UIHorsePosition" type="Marker2D" parent="BoardGame/Broad"]
+scale = Vector2(0.750188, 0.750188)
+
+[node name="Green" type="Sprite2D" parent="BoardGame/Broad/UIHorsePosition"]
+position = Vector2(282, 274)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_4riu1")
+
+[node name="Yellow" type="Sprite2D" parent="BoardGame/Broad/UIHorsePosition"]
+position = Vector2(282, -286)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_4riu1")
+
+[node name="Blue" type="Sprite2D" parent="BoardGame/Broad/UIHorsePosition"]
+position = Vector2(-280, -280)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_4riu1")
+
+[node name="Red" type="Sprite2D" parent="BoardGame/Broad/UIHorsePosition"]
+position = Vector2(-280, 280)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("7_4riu1")
+
+[node name="MovePoints" type="Node2D" parent="BoardGame/Broad"]
+
+[node name="MovePoint" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_slhn7")
+
+[node name="MovePoint2" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.7659, 312.828)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint2"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_rqpu7")
+
+[node name="MovePoint3" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.7659, 270.068)
+
+[node name="MovePoint4" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.0158, 228.807)
+
+[node name="MovePoint5" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.0158, 186.047)
+
+[node name="MovePoint6" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.7659, 146.287)
+
+[node name="MovePoint7" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.7659, 103.526)
+
+[node name="MovePoint8" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.7659, 62.2656)
+
+[node name="MovePoint9" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(105.026, 62.2656)
+
+[node name="MovePoint10" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(147.037, 62.2656)
+
+[node name="MovePoint11" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(189.797, 62.2656)
+
+[node name="MovePoint12" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(230.308, 63.0158)
+
+[node name="MovePoint13" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(273.068, 62.2656)
+
+[node name="MovePoint14" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(313.578, 62.2656)
+
+[node name="MovePoint15" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(316.579, -3.8147e-06)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint15"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_slhn7")
+
+[node name="MovePoint16" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(316.579, -63.0158)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint16"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_rqpu7")
+
+[node name="MovePoint17" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(272.318, -63.0158)
+
+[node name="MovePoint18" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(231.058, -63.7659)
+
+[node name="MovePoint19" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(189.047, -63.7659)
+
+[node name="MovePoint20" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(146.287, -63.7659)
+
+[node name="MovePoint21" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(104.276, -63.7659)
+
+[node name="MovePoint22" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(61.5154, -64.5161)
+
+[node name="MovePoint23" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.0158, -105.026)
+
+[node name="MovePoint24" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.0158, -148.537)
+
+[node name="MovePoint25" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(64.5161, -189.047)
+
+[node name="MovePoint26" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(62.2656, -232.558)
+
+[node name="MovePoint27" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(63.7659, -273.068)
+
+[node name="MovePoint28" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(64.5161, -315.079)
+
+[node name="MovePoint29" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-4.47035e-06, -316.579)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint29"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_slhn7")
+
+[node name="MovePoint30" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-65.2663, -315.079)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint30"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_rqpu7")
+
+[node name="MovePoint31" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-65.2663, -270.818)
+
+[node name="MovePoint32" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-65.2663, -229.557)
+
+[node name="MovePoint33" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-63.766, -188.297)
+
+[node name="MovePoint34" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-63.766, -144.036)
+
+[node name="MovePoint35" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-63.766, -102.776)
+
+[node name="MovePoint36" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-63.766, -63.7659)
+
+[node name="MovePoint37" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-105.026, -63.7659)
+
+[node name="MovePoint38" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-147.787, -64.5161)
+
+[node name="MovePoint39" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-190.548, -63.0157)
+
+[node name="MovePoint40" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-229.557, -64.5161)
+
+[node name="MovePoint41" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-272.318, -65.2663)
+
+[node name="MovePoint42" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-315.079, -63.7659)
+
+[node name="MovePoint43" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-315.829, -0.750172)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint43"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("6_slhn7")
+
+[node name="MovePoint44" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-315.829, 63.0158)
+
+[node name="Sprite2D2" type="Sprite2D" parent="BoardGame/Broad/MovePoints/MovePoint44"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_rqpu7")
+
+[node name="MovePoint45" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-270.068, 63.0158)
+
+[node name="MovePoint46" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-228.807, 62.2656)
+
+[node name="MovePoint47" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-187.547, 62.2656)
+
+[node name="MovePoint48" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-145.536, 62.2656)
+
+[node name="MovePoint49" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-103.526, 62.2656)
+
+[node name="MovePoint50" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-62.2656, 63.0158)
+
+[node name="MovePoint51" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-63.766, 104.276)
+
+[node name="MovePoint52" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-64.5161, 147.787)
+
+[node name="MovePoint53" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-63.0158, 189.047)
+
+[node name="MovePoint54" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-64.5161, 230.308)
+
+[node name="MovePoint55" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-65.2663, 273.818)
+
+[node name="MovePoint56" parent="BoardGame/Broad/MovePoints" instance=ExtResource("5_5qwfr")]
+position = Vector2(-65.2663, 314.329)
+scale = Vector2(0.99077, 1)
+
+[node name="LevelPoints" type="Node2D" parent="BoardGame/Broad"]
+
+[node name="Green" type="Node2D" parent="BoardGame/Broad/LevelPoints"]
+position = Vector2(0, 277.569)
+
+[node name="LevelPoint" parent="BoardGame/Broad/LevelPoints/Green" instance=ExtResource("6_0r1m7")]
+
+[node name="LevelPoint2" parent="BoardGame/Broad/LevelPoints/Green" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -49.512)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint2" index="0"]
+position = Vector2(-0.00975281, 1.99552)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint2" index="1"]
+frame = 1
+
+[node name="LevelPoint3" parent="BoardGame/Broad/LevelPoints/Green" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -90.0221)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint3" index="0"]
+position = Vector2(-0.00975281, -0.255038)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint3" index="1"]
+frame = 2
+
+[node name="LevelPoint4" parent="BoardGame/Broad/LevelPoints/Green" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -133.533)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint4" index="1"]
+frame = 3
+
+[node name="LevelPoint5" parent="BoardGame/Broad/LevelPoints/Green" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -176.294)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint5" index="1"]
+frame = 4
+
+[node name="LevelPoint6" parent="BoardGame/Broad/LevelPoints/Green" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -219.054)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Green/LevelPoint6" index="1"]
+frame = 5
+
+[node name="Yellow" type="Node2D" parent="BoardGame/Broad/LevelPoints"]
+position = Vector2(278.32, -1.5004)
+rotation = -1.5708
+
+[node name="LevelPoint" parent="BoardGame/Broad/LevelPoints/Yellow" instance=ExtResource("6_0r1m7")]
+
+[node name="LevelPoint2" parent="BoardGame/Broad/LevelPoints/Yellow" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -49.512)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Yellow/LevelPoint2" index="0"]
+position = Vector2(0.000129219, 2.24978)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Yellow/LevelPoint2" index="1"]
+frame = 1
+
+[node name="LevelPoint3" parent="BoardGame/Broad/LevelPoints/Yellow" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -90.0221)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Yellow/LevelPoint3" index="1"]
+frame = 2
+
+[node name="LevelPoint4" parent="BoardGame/Broad/LevelPoints/Yellow" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -133.533)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Yellow/LevelPoint4" index="1"]
+frame = 3
+
+[node name="LevelPoint5" parent="BoardGame/Broad/LevelPoints/Yellow" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -176.294)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Yellow/LevelPoint5" index="1"]
+frame = 4
+
+[node name="LevelPoint6" parent="BoardGame/Broad/LevelPoints/Yellow" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -219.054)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Yellow/LevelPoint6" index="1"]
+frame = 5
+
+[node name="Blue" type="Node2D" parent="BoardGame/Broad/LevelPoints"]
+position = Vector2(-4.47035e-06, -279.82)
+rotation = 3.14159
+
+[node name="LevelPoint" parent="BoardGame/Broad/LevelPoints/Blue" instance=ExtResource("6_0r1m7")]
+
+[node name="LevelPoint2" parent="BoardGame/Broad/LevelPoints/Blue" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -49.512)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint2" index="0"]
+position = Vector2(-0.740348, 1.75491)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint2" index="1"]
+frame = 1
+
+[node name="LevelPoint3" parent="BoardGame/Broad/LevelPoints/Blue" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -90.0221)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint3" index="0"]
+position = Vector2(0.00993723, -0.495699)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint3" index="1"]
+frame = 2
+
+[node name="LevelPoint4" parent="BoardGame/Broad/LevelPoints/Blue" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -133.533)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint4" index="1"]
+frame = 3
+
+[node name="LevelPoint5" parent="BoardGame/Broad/LevelPoints/Blue" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -176.294)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint5" index="1"]
+frame = 4
+
+[node name="LevelPoint6" parent="BoardGame/Broad/LevelPoints/Blue" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -219.054)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Blue/LevelPoint6" index="1"]
+frame = 5
+
+[node name="Red" type="Node2D" parent="BoardGame/Broad/LevelPoints"]
+position = Vector2(-278.32, -1.50037)
+rotation = 1.5708
+
+[node name="LevelPoint" parent="BoardGame/Broad/LevelPoints/Red" instance=ExtResource("6_0r1m7")]
+
+[node name="LevelPoint2" parent="BoardGame/Broad/LevelPoints/Red" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -49.512)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint2" index="0"]
+position = Vector2(-0.000177741, 1.49959)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint2" index="1"]
+frame = 1
+
+[node name="LevelPoint3" parent="BoardGame/Broad/LevelPoints/Red" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -90.0221)
+
+[node name="Square" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint3" index="0"]
+position = Vector2(-0.750511, -0.751009)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint3" index="1"]
+frame = 2
+
+[node name="LevelPoint4" parent="BoardGame/Broad/LevelPoints/Red" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -133.533)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint4" index="1"]
+frame = 3
+
+[node name="LevelPoint5" parent="BoardGame/Broad/LevelPoints/Red" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -176.294)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint5" index="1"]
+frame = 4
+
+[node name="LevelPoint6" parent="BoardGame/Broad/LevelPoints/Red" instance=ExtResource("6_0r1m7")]
+position = Vector2(0.750188, -219.054)
+
+[node name="Number" parent="BoardGame/Broad/LevelPoints/Red/LevelPoint6" index="1"]
+frame = 5
+
+[node name="ItemPosition" type="Marker2D" parent="BoardGame/Broad"]
+scale = Vector2(0.750188, 0.750188)
+
+[node name="0" type="Marker2D" parent="BoardGame/Broad/ItemPosition"]
+position = Vector2(-56, 0)
+
+[node name="1" type="Marker2D" parent="BoardGame/Broad/ItemPosition"]
+position = Vector2(0, -48)
+
+[node name="2" type="Marker2D" parent="BoardGame/Broad/ItemPosition"]
+position = Vector2(56, 0)
+
+[node name="3" type="Marker2D" parent="BoardGame/Broad/ItemPosition"]
+position = Vector2(0, 48)
+
+[node name="HorsePosition" type="Marker2D" parent="BoardGame/Broad"]
+scale = Vector2(0.750188, 0.750188)
+
+[node name="Green" type="Marker2D" parent="BoardGame/Broad/HorsePosition"]
+position = Vector2(282, 274)
+
+[node name="Yellow" type="Marker2D" parent="BoardGame/Broad/HorsePosition"]
+position = Vector2(282, -286)
+
+[node name="Blue" type="Marker2D" parent="BoardGame/Broad/HorsePosition"]
+position = Vector2(-280, -280)
+
+[node name="Red" type="Marker2D" parent="BoardGame/Broad/HorsePosition"]
+position = Vector2(-280, 280)
+
+[node name="Panel" type="Panel" parent="."]
+process_mode = 1
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dice" parent="Panel" instance=ExtResource("4_17pcm")]
+position = Vector2(544, 728)
+
+[node name="TeamInfo" type="Label" parent="Panel"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.5
+offset_top = -27.5
+offset_right = 183.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Team select: Green"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = 48.0
+offset_right = 216.0
+offset_bottom = 845.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="OptionsMenu" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Options"
+horizontal_alignment = 1
+
+[node name="Level" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Level"
+
+[node name="Summon" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Summon"
+
+[node name="Kick" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Kick"
+
+[node name="Jump" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Jump"
+
+[node name="Run" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Run"
+
+[node name="Roll" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Roll"
+
+[node name="End" type="Button" parent="Panel/HBoxContainer/OptionsMenu"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "End"
+
+[node name="OptionsSelect" type="VBoxContainer" parent="Panel/HBoxContainer"]
+layout_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Panel/HBoxContainer/OptionsSelect"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Move"
+horizontal_alignment = 1
+
+[node name="OptionSelect" parent="Panel/HBoxContainer/OptionsSelect" instance=ExtResource("8_gthwk")]
+layout_mode = 2
+
+[node name="OptionSelect2" parent="Panel/HBoxContainer/OptionsSelect" instance=ExtResource("8_gthwk")]
+layout_mode = 2
+
+[node name="OptionSelect3" parent="Panel/HBoxContainer/OptionsSelect" instance=ExtResource("8_gthwk")]
+layout_mode = 2
+
+[node name="OptionSelect4" parent="Panel/HBoxContainer/OptionsSelect" instance=ExtResource("8_gthwk")]
+layout_mode = 2
+
+[node name="Disable" type="Control" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreBoard" type="VBoxContainer" parent="."]
+process_mode = 1
+z_index = 2
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 276.0
+
+[node name="TeamInfo" parent="ScoreBoard" instance=ExtResource("8_h6qyn")]
+layout_mode = 2
+
+[node name="TeamInfo2" parent="ScoreBoard" instance=ExtResource("8_h6qyn")]
+layout_mode = 2
+
+[node name="TeamInfo3" parent="ScoreBoard" instance=ExtResource("8_h6qyn")]
+layout_mode = 2
+
+[node name="TeamInfo4" parent="ScoreBoard" instance=ExtResource("8_h6qyn")]
+layout_mode = 2
+
+[node name="ButtonOpen" type="Button" parent="."]
+process_mode = 3
+z_index = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+theme = ExtResource("9_ghae4")
+text = "Menu"
+
+[node name="Menu" type="Panel" parent="."]
+process_mode = 3
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1me1o")
+
+[node name="List" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.5
+offset_top = -119.5
+offset_right = 271.5
+offset_bottom = 119.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Team00" type="HBoxContainer" parent="Menu/List"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/List/Team00"]
+custom_minimum_size = Vector2(350, 2.08165e-12)
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+theme_override_font_sizes/font_size = 50
+text = "Red Team"
+
+[node name="OptionButton" type="OptionButton" parent="Menu/List/Team00"]
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Player"
+popup/item_0/id = 0
+popup/item_1/text = "AI"
+popup/item_1/id = 1
+
+[node name="Team01" type="HBoxContainer" parent="Menu/List"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/List/Team01"]
+custom_minimum_size = Vector2(350, 2.08165e-12)
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+theme_override_font_sizes/font_size = 50
+text = "Red Team"
+
+[node name="OptionButton" type="OptionButton" parent="Menu/List/Team01"]
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Player"
+popup/item_0/id = 0
+popup/item_1/text = "AI"
+popup/item_1/id = 1
+
+[node name="Team02" type="HBoxContainer" parent="Menu/List"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/List/Team02"]
+custom_minimum_size = Vector2(350, 2.08165e-12)
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+theme_override_font_sizes/font_size = 50
+text = "Red Team"
+
+[node name="OptionButton" type="OptionButton" parent="Menu/List/Team02"]
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Player"
+popup/item_0/id = 0
+popup/item_1/text = "AI"
+popup/item_1/id = 1
+
+[node name="Team03" type="HBoxContainer" parent="Menu/List"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/List/Team03"]
+custom_minimum_size = Vector2(350, 2.08165e-12)
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+text = "Red Team"
+
+[node name="OptionButton" type="OptionButton" parent="Menu/List/Team03"]
+layout_mode = 2
+theme = ExtResource("9_ghae4")
+alignment = 1
+item_count = 2
+selected = 0
+popup/item_0/text = "Player"
+popup/item_0/id = 0
+popup/item_1/text = "AI"
+popup/item_1/id = 1
+
+[node name="New" type="Button" parent="Menu/List"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "New Game"
+
+[node name="Save" type="Button" parent="Menu/List"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Save Session"
+
+[node name="Load" type="Label" parent="Menu/List"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Load Session"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Data" type="VBoxContainer" parent="Menu/List"]
+layout_mode = 2
+
+[node name="SaveData" parent="Menu/List/Data" instance=ExtResource("10_nnb0w")]
+layout_mode = 2
+
+[node name="ButtonClose" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_bottom = 128.0
+grow_horizontal = 0
+theme = ExtResource("9_ghae4")
+text = "X"
+
+[node name="Data" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("8_padt3")
+
+[editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint"]
+[editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint2"]
+[editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint3"]
+[editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint4"]
+[editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint5"]
+[editable path="BoardGame/Broad/LevelPoints/Green/LevelPoint6"]
+[editable path="BoardGame/Broad/LevelPoints/Yellow/LevelPoint"]
+[editable path="BoardGame/Broad/LevelPoints/Yellow/LevelPoint2"]
+[editable path="BoardGame/Broad/LevelPoints/Yellow/LevelPoint3"]
+[editable path="BoardGame/Broad/LevelPoints/Yellow/LevelPoint4"]
+[editable path="BoardGame/Broad/LevelPoints/Yellow/LevelPoint5"]
+[editable path="BoardGame/Broad/LevelPoints/Yellow/LevelPoint6"]
+[editable path="BoardGame/Broad/LevelPoints/Blue/LevelPoint"]
+[editable path="BoardGame/Broad/LevelPoints/Blue/LevelPoint2"]
+[editable path="BoardGame/Broad/LevelPoints/Blue/LevelPoint3"]
+[editable path="BoardGame/Broad/LevelPoints/Blue/LevelPoint4"]
+[editable path="BoardGame/Broad/LevelPoints/Blue/LevelPoint5"]
+[editable path="BoardGame/Broad/LevelPoints/Blue/LevelPoint6"]
+[editable path="BoardGame/Broad/LevelPoints/Red/LevelPoint"]
+[editable path="BoardGame/Broad/LevelPoints/Red/LevelPoint2"]
+[editable path="BoardGame/Broad/LevelPoints/Red/LevelPoint3"]
+[editable path="BoardGame/Broad/LevelPoints/Red/LevelPoint4"]
+[editable path="BoardGame/Broad/LevelPoints/Red/LevelPoint5"]
+[editable path="BoardGame/Broad/LevelPoints/Red/LevelPoint6"]

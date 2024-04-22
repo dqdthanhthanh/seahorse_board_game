@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2ewcjyyw7lqs"]
+
+[ext_resource type="Texture2D" uid="uid://cdy3b40esc0c3" path="res://2d/horse_icon.png" id="1_3hbny"]
+[ext_resource type="Script" path="res://script/horse.gd" id="1_p4muk"]
+
+[node name="Horse" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_p4muk")
+label = NodePath("Label")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.301961, 0, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_3hbny")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -28.0
+offset_right = 19.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 40
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1

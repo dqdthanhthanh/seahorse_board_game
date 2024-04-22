@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cste3l75kmum3"]
+
+[node name="OptionSelect" type="Button"]
+custom_minimum_size = Vector2(200, 100)
+theme_override_font_sizes/font_size = 40
+text = "Horse"

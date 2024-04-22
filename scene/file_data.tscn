@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dji6kvgpvkryd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oyaka"]
+bg_color = Color(0.301961, 0.301961, 0.301961, 1)
+
+[node name="SaveData" type="Button"]
+custom_minimum_size = Vector2(200, 100)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_oyaka")
+text = "Empty Save"
